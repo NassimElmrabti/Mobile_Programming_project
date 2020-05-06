@@ -3,21 +3,24 @@ package com.example.td3;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-    private List<String> values;
+    private List<FinalFantasy> values;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        ImageView mImg = (ImageView) itemView.findViewById(R.id.icon);
         TextView txtHeader;
         TextView txtFooter;
         View layout;
@@ -30,7 +33,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
     }
 
-    public void add(int position, String item) {
+    public void add(int position, FinalFantasy item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -41,7 +44,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(List<String> myDataset) {
+    public ListAdapter(List<FinalFantasy> myDataset) {
         values = myDataset;
     }
 
@@ -65,8 +68,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = values.get(position);
-        holder.txtHeader.setText(name);
+        final FinalFantasy currentFinalFantasy = values.get(position);
+        holder.txtHeader.setText(currentFinalFantasy.getName());
         holder.txtHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +77,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             }
         });
 
-        holder.txtFooter.setText("Footer: " + name);
+        Picasso.get().load(currentFinalFantasy.getImageUrl()).resize(250,250).into(holder.mImg);
+
+        holder.txtFooter.setText(currentFinalFantasy.getAnnee());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
