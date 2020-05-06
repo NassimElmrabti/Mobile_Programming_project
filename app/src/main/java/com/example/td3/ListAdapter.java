@@ -77,7 +77,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             }
         });
 
-        Picasso.get().load(currentFinalFantasy.getImageUrl()).resize(250,250).into(holder.mImg);
+        Picasso.get().load(currentFinalFantasy.getImageUrl()).resize(300,300).into(holder.mImg);
 
         holder.txtFooter.setText(currentFinalFantasy.getAnnee());
     }
