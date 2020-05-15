@@ -15,21 +15,30 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<FinalFantasy> values;
+    private static OnFFListener OnFFListener;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView mImg = (ImageView) itemView.findViewById(R.id.icon);
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        OnFFListener OnFFListener;
+        ImageView mImg = itemView.findViewById(R.id.icon);
         TextView txtHeader;
         TextView txtFooter;
         View layout;
 
-        ViewHolder(View v) {
+        public ViewHolder(View v, OnFFListener onFFListener) {
             super(v);
             layout = v;
-            txtHeader = (TextView) v.findViewById(R.id.firstLine);
-            txtFooter = (TextView) v.findViewById(R.id.secondLine);
+            txtHeader = v.findViewById(R.id.firstLine);
+            txtFooter = v.findViewById(R.id.secondLine);
+            this.OnFFListener = onFFListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            OnFFListener.OnFFClick(getAdapterPosition());
         }
     }
 
@@ -39,13 +48,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     private void remove(int position) {
-        values.remove(position);
-        notifyItemRemoved(position);
+       values.remove(position);
+       notifyItemRemoved(position);
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(List<FinalFantasy> myDataset) {
+    public ListAdapter(List<FinalFantasy> myDataset, OnFFListener OnFFListener) {
         values = myDataset;
+        ListAdapter.OnFFListener = OnFFListener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -59,7 +69,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         View v =
                 inflater.inflate(R.layout.row_layout, parent, false);
         // set the view's size, margins, paddings and layout parameters
-        ViewHolder vh = new ViewHolder(v);
+        ViewHolder vh = new ViewHolder(v, OnFFListener);
         return vh;
     }
 
@@ -70,12 +80,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         // - replace the contents of the view with that element
         final FinalFantasy currentFinalFantasy = values.get(position);
         holder.txtHeader.setText(currentFinalFantasy.getName());
-        holder.txtHeader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                remove(position);
-            }
-        });
 
         Picasso.get().load(currentFinalFantasy.getImageUrl()).resize(300,300).into(holder.mImg);
 
@@ -86,6 +90,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return values.size();
+    }
+
+    public interface OnFFListener{
+        void OnFFClick(int position);
     }
 
 }

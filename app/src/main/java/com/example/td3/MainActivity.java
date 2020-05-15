@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -23,9 +25,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements ListAdapter.OnFFListener {
 
     static final String BASE_URL = "https://raw.githubusercontent.com/kalash94/Mobile_Programming_project/API_Rest/app/src/main/java/com/example/td3/";
+    private static final String TAG = "Clicked";
 
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        mAdapter = new ListAdapter(FinalFantasyList);
+        mAdapter = new ListAdapter(FinalFantasyList, this);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -123,5 +126,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void showError() {
         Toast.makeText(getApplicationContext(), "API Error", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void OnFFClick(int position) {
+       //FFArrayList.get(position);
+       //Intent intent = new Intent(this, NewActivity.class);
+       //startActivity(intent);
+       Log.d(TAG, "OnFFClick: clicked" + position);
     }
 }
