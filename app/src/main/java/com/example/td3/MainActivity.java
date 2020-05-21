@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity  implements ListAdapter.OnFF
     private RecyclerView.LayoutManager layoutManager;
     private SharedPreferences sharedPreferences;
     private Gson gson;
+    public ArrayList<FinalFantasy> FFArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,14 @@ public class MainActivity extends AppCompatActivity  implements ListAdapter.OnFF
         gson = new GsonBuilder()
                 .setLenient()
                 .create();
+
+        FFArrayList = getArrayDataFromCache();
+        if (FFArrayList != null)
+        {
+            showList(FFArrayList);
+        }else {
+            makeApiCall();
+        }
 
         List<FinalFantasy> FinalFantasyList = getDataFromCache();
         if (FinalFantasyList != null)
@@ -69,21 +78,30 @@ public class MainActivity extends AppCompatActivity  implements ListAdapter.OnFF
         }
     }
 
+    private ArrayList<FinalFantasy> getArrayDataFromCache(){
+        String jsonFinalFantasy = sharedPreferences.getString(Constants.KEY_FINAL_FANTASY_LIST, null);
+
+        if(jsonFinalFantasy == null){
+            return null;
+        }else {
+
+            Type listType = new TypeToken<ArrayList<FinalFantasy>>() {
+            }.getType();
+            return gson.fromJson(jsonFinalFantasy, listType);
+        }
+    }
+
     private void showList(List<FinalFantasy> FinalFantasyList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-
-
         mAdapter = new ListAdapter(FinalFantasyList, this);
         recyclerView.setAdapter(mAdapter);
     }
 
     private void makeApiCall(){
-
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -110,8 +128,6 @@ public class MainActivity extends AppCompatActivity  implements ListAdapter.OnFF
                 showError();
             }
         });
-
-
     }
 
     private void saveList(List<FinalFantasy> finalFantasyList) {
@@ -130,9 +146,15 @@ public class MainActivity extends AppCompatActivity  implements ListAdapter.OnFF
 
     @Override
     public void OnFFClick(int position) {
-       //FFArrayList.get(position);
-       //Intent intent = new Intent(this, NewActivity.class);
-       //startActivity(intent);
-       Log.d(TAG, "OnFFClick: clicked" + position);
+
+
+        Log.d(TAG, "OnFFClick: clicked" + position);
+        Toast.makeText(getApplicationContext(), "Clicked on " + position + " position", Toast.LENGTH_SHORT).show();
+
+
+        Intent intent = new Intent(this, NewActivity.class);
+        intent.putExtra("selected_FF", FFArrayList.get(position));
+
+        startActivity(intent);
     }
 }
