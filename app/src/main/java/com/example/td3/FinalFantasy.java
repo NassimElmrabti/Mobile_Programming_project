@@ -6,16 +6,20 @@ import android.os.Parcelable;
 public class FinalFantasy implements Parcelable {
     private String name;
     private String annee;
+    private String plateforme;
     private String ventes;
     private String ImageUrl;
     private String NumeroDeTop;
+    private String Description;
 
     protected FinalFantasy(Parcel in) {
         name = in.readString();
         annee = in.readString();
+        plateforme = in.readString();
         ventes = in.readString();
         ImageUrl = in.readString();
         NumeroDeTop = in.readString();
+        Description = in.readString();
     }
 
     public static final Creator<FinalFantasy> CREATOR = new Creator<FinalFantasy>() {
@@ -38,6 +42,8 @@ public class FinalFantasy implements Parcelable {
         return annee;
     }
 
+    public String getPlateforme() { return plateforme;}
+
     public String getVentes() {
         return ventes;
     }
@@ -50,6 +56,8 @@ public class FinalFantasy implements Parcelable {
         return NumeroDeTop;
     }
 
+    public String getDescription(){return Description;}
+
     @Override
     public int describeContents() {
         return 0;
@@ -59,8 +67,10 @@ public class FinalFantasy implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(annee);
+        dest.writeString(plateforme);
         dest.writeString(ventes);
         dest.writeString(ImageUrl);
         dest.writeString(NumeroDeTop);
+        dest.writeString(Description);
     }
 }

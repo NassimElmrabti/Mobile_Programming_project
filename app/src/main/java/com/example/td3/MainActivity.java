@@ -49,10 +49,8 @@ public class MainActivity extends AppCompatActivity  implements ListAdapter.OnFF
                 .create();
 
         FFArrayList = getArrayDataFromCache();
-        if (FFArrayList != null)
+        if (FFArrayList == null)
         {
-            showList(FFArrayList);
-        }else {
             makeApiCall();
         }
 
@@ -147,10 +145,8 @@ public class MainActivity extends AppCompatActivity  implements ListAdapter.OnFF
     @Override
     public void OnFFClick(int position) {
 
-
         Log.d(TAG, "OnFFClick: clicked" + position);
-        Toast.makeText(getApplicationContext(), "Clicked on " + position + " position", Toast.LENGTH_SHORT).show();
-
+        //Toast.makeText(getApplicationContext(), "Clicked on " + position + " position", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, NewActivity.class);
         intent.putExtra("selected_FF", FFArrayList.get(position));
