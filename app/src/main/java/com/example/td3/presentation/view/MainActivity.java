@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.td3.Constants;
 import com.example.td3.R;
+import com.example.td3.Singletons;
 import com.example.td3.data.FinalFantasyApi;
 import com.example.td3.presentation.controller.MainController;
 import com.example.td3.presentation.model.FinalFantasy;
@@ -46,10 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
         controller = new MainController(
                 this,
-                new GsonBuilder()
-                        .setLenient()
-                        .create(),
-                getSharedPreferences("application_esiea", Context.MODE_PRIVATE)
+                Singletons.getGson(),
+                Singletons.getSharedPreferences(getApplicationContext())
         );
         controller.onStart();
 
