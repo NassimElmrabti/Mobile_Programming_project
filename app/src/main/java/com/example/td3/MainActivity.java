@@ -27,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity  implements ListAdapter.OnFFListener {
 
-    static final String BASE_URL = "https://raw.githubusercontent.com/kalash94/Mobile_Programming_project/API_Rest/app/src/main/java/com/example/td3/";
+    static final String BASE_URL = "https://raw.githubusercontent.com/kalash94/Mobile_Programming_project/master/app/src/main/java/com/example/td3/FinalFantasyApi.json";
     private static final String TAG = "Clicked";
 
     private RecyclerView recyclerView;
