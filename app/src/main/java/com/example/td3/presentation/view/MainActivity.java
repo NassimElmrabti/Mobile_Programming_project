@@ -70,4 +70,5 @@ public class MainActivity extends AppCompatActivity {
     public void navigateUpToDetails(FinalFantasy finalFantasy) {
         Toast.makeText(getApplicationContext(), "TODO NAVIGATE", Toast.LENGTH_SHORT).show();
     }
+
 }
