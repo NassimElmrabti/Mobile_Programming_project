@@ -31,8 +31,6 @@ public class MainController {
 
     public void onStart(){
 
-
-
         List<FinalFantasy> FinalFantasyList = getDataFromCache();
         if (FinalFantasyList != null)
         {
@@ -91,7 +89,7 @@ public class MainController {
 
 
     public void onItemClick(FinalFantasy finalFantasy){
-
+        view.navigateUpToDetails(finalFantasy);
     }
 
     public void onButtonAClick(){

@@ -17,10 +17,12 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<FinalFantasy> values;
+    private OnItemClickListener listener;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
+    public interface OnItemClickListener {
+        void onItemClick(FinalFantasy item);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView mImg = (ImageView) itemView.findViewById(R.id.icon);
         TextView txtHeader;
@@ -46,8 +48,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(List<FinalFantasy> myDataset) {
-        values = myDataset;
+    public ListAdapter(List<FinalFantasy> myDataset, OnItemClickListener listener) {
+        this.values = myDataset;
+        this.listener = listener;
+    }
+
+    public void setListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -82,6 +89,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         Picasso.get().load(currentFinalFantasy.getImageUrl()).resize(300,300).into(holder.mImg);
 
         holder.txtFooter.setText(currentFinalFantasy.getAnnee());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+           @Override public void onClick(View v){
+               listener.onItemClick(currentFinalFantasy);
+           }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
