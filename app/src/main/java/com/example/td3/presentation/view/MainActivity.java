@@ -1,4 +1,4 @@
-package com.example.td3;
+package com.example.td3.presentation.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,12 +9,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.td3.Constants;
+import com.example.td3.R;
+import com.example.td3.data.FinalFantasyApi;
+import com.example.td3.presentation.model.FinalFantasy;
+import com.example.td3.presentation.model.RestFinalFantasyResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    static final String BASE_URL = "https://raw.githubusercontent.com/kalash94/Mobile_Programming_project/API_Rest/app/src/main/java/com/example/td3/";
+    static final String BASE_URL = "https://raw.githubusercontent.com/kalash94/Mobile_Programming_project/master/app/src/main/java/com/example/td3/";
 
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
