@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">TD3</string>
-    <string name="textview">TextView</string>
+    <string name="game_name">game_name</string>
 </resources>
