@@ -20,7 +20,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -40,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 Singletons.getSharedPreferences(getApplicationContext())
         );
         controller.onStart();
-
-
     }
 
 
@@ -51,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-
-
         mAdapter = new ListAdapter(FinalFantasyList, new ListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(FinalFantasy item) {
@@ -62,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(mAdapter);
     }
-
-
 
     public void showError() {
         Toast.makeText(getApplicationContext(), "API Error", Toast.LENGTH_SHORT).show();
