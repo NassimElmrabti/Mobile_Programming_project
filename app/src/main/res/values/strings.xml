@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TD3</string>
     <string name="game_name">game_name</string>
+    <string name="year_released">year_released</string>
+    <string name="platform">platform</string>
+    <string name="nombres_de_ventes">nombre_de_ventes</string>
+    <string name="Description">Description</string>
 </resources>

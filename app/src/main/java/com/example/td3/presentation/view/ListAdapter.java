@@ -42,11 +42,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         notifyItemInserted(position);
     }
 
-    private void remove(int position) {
-        values.remove(position);
-        notifyItemRemoved(position);
-    }
-
     // Provide a suitable constructor (depends on the kind of dataset)
     public ListAdapter(List<FinalFantasy> myDataset, OnItemClickListener listener) {
         this.values = myDataset;
@@ -79,16 +74,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         // - replace the contents of the view with that element
         final FinalFantasy currentFinalFantasy = values.get(position);
         holder.txtHeader.setText(currentFinalFantasy.getName());
-        holder.txtHeader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                remove(position);
-            }
-        });
 
         Picasso.get().load(currentFinalFantasy.getImageUrl()).resize(300,300).into(holder.mImg);
 
-        holder.txtFooter.setText(currentFinalFantasy.getAnnee());
+        holder.txtFooter.setText(currentFinalFantasy.getNumeroDeTop());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
            @Override public void onClick(View v){

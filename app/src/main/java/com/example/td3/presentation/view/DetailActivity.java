@@ -17,6 +17,13 @@ public class DetailActivity extends AppCompatActivity {
 
     private TextView txtDetail;
     private ImageView ImageView;
+    private TextView txtYear;
+    private TextView txtPlateform;
+    private TextView txtNumberSells;
+    private TextView txtDescription;
+
+
+
 
 
     @Override
@@ -25,6 +32,12 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         txtDetail = findViewById(R.id.detail_txt);
+        txtYear = findViewById(R.id.year_released);
+        txtPlateform = findViewById(R.id.platform);
+        txtNumberSells = findViewById(R.id.nombre_de_ventes);
+        txtDescription = findViewById(R.id.description);
+
+
 
         Intent intent = getIntent();
         String FinalFantasyJson = intent.getStringExtra(Constants.KEY_FINAL_FANTASY_INTENT);
@@ -35,6 +48,10 @@ public class DetailActivity extends AppCompatActivity {
 
     private void showDetail(FinalFantasy finalFantasy) {
         txtDetail.setText(finalFantasy.getName());
-        Picasso.get().load(finalFantasy.getImageUrl()).resize(300, 400).into((ImageView) findViewById(R.id.logo_game));
+        Picasso.get().load(finalFantasy.getImageUrl()).resize(400, 500).into((ImageView) findViewById(R.id.logo_game));
+        txtYear.setText(finalFantasy.getAnnee());
+        txtPlateform.setText(finalFantasy.getPlateforme());
+        txtNumberSells.setText(finalFantasy.getVentes());
+        txtDescription.setText(finalFantasy.getDescription());
     }
 }
