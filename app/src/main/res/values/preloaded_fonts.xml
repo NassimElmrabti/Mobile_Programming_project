@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/adamina</item>
+        <item>@font/archivo_black</item>
+        <item>@font/baloo</item>
+        <item>@font/londrina_solid</item>
+        <item>@font/palanquin_dark</item>
+        <item>@font/suez_one</item>
+    </array>
+</resources>
