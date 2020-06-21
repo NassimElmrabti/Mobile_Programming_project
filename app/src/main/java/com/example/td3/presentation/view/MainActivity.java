@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.td3.Constants;
 import com.example.td3.R;
 import com.example.td3.Singletons;
 import com.example.td3.presentation.controller.MainController;
@@ -68,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void navigateUpToDetails(FinalFantasy finalFantasy) {
-        Toast.makeText(getApplicationContext(), "TODO NAVIGATE", Toast.LENGTH_SHORT).show();
-    }
+        Intent myIntent = new Intent(MainActivity.this, DetailActivity.class);
+        myIntent.putExtra(Constants.KEY_FINAL_FANTASY_INTENT, Singletons.getGson().toJson(finalFantasy)); //Optional parameters
+        getBaseContext().startActivity(myIntent);    }
 
 }
